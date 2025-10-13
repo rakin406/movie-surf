@@ -1,0 +1,9 @@
+*.md
+*.sh
+.dockerignore
+.git*
+.host-arch
+Dockerfile*
+LICENSE
+node_modules
+npm-debug.log
