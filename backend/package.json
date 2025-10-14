@@ -2,6 +2,7 @@
   "name": "viola-app",
   "version": "0.0.0",
   "description": "Movie streaming web application",
+  "type": "module",
   "main": "server.ts",
   "scripts": {
     "start": "tsx src/server.ts"
