@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "Movie streaming web application",
   "type": "module",
-  "main": "server.ts",
   "scripts": {
-    "start": "tsx src/server.ts"
+    "start": "tsx src/server.ts",
+    "dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
   "author": "Rakin Rahman",
@@ -17,6 +17,6 @@
   "devDependencies": {
     "tsx": "^4.20.6",
     "@types/node": "^24.7.2",
-    "nodemon": "^3.1.10"
+    "typescript": "^5.9.3"
   }
 }

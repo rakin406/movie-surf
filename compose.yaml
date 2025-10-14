@@ -4,8 +4,5 @@ services:
       context: ./backend
     ports:
       - "3000:3000"
-    develop:
-      watch:
-        - action: sync
-          path: ./backend/src
-          target: /src
+    volumes:
+      - ./backend/src:/app/src
