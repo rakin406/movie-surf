@@ -3,7 +3,8 @@ WORKDIR /src
 COPY . .
 
 # Install the application dependencies
-RUN npm ci --only=production
+# RUN npm ci --only=production
+RUN npm install --production=false
 
 EXPOSE 3000
 
@@ -11,4 +12,4 @@ EXPOSE 3000
 RUN useradd app
 USER app
 
-CMD ["node", "./src/server.ts"]
+CMD ["npm", "run", "start"]
