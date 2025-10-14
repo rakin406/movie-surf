@@ -1,8 +1,17 @@
 services:
   backend:
     build:
+      secrets:
+        - oauth_client_id
+        - oauth_client_secret
       context: ./backend
     ports:
       - "3000:3000"
     volumes:
       - ./backend/src:/app/src
+
+secrets:
+  oauth_client_id:
+    environment: OAUTH_CLIENT_ID
+  oauth_client_secret:
+    environment: OAUTH_CLIENT_SECRET
