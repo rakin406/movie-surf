@@ -8,7 +8,7 @@ function App() {
     fetch("http://localhost:3000")
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Failed to connect to backend"));
+      .catch(() => setMessage("Failed to connect to server"));
   }, []);
 
   return <h1>{message}</h1>;
