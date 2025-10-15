@@ -1,30 +1,31 @@
 import { FastifyInstance } from "fastify";
-import { MovieDb } from "moviedb-promise";
 
 async function routes(fastify: FastifyInstance, options) {
-  // Connect to TMDB API
-  let moviedb = new MovieDb("your_api_key");
-
   fastify.get("/", async (request, reply) => {
     return { hello: "world" };
   });
 
   // Gets a list of trending movies
   fastify.get("/trending", async (request, reply) => {
-    let promises = [];
+    // TMDB API
+    const url =
+      "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+    };
 
-    for (let i = 0; i < 30; ++i) {
-      promises.push(
-        moviedb.trending({
-          media_type: "all",
-          time_window: "week",
-        })
-      );
+    try {
+      const res = await fetch(url, options);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      fastify.log.error(err);
+      reply.code(500).send({ error: "Failed to fetch trending movies" });
     }
-
-    Promise.all(promises).then((values) => {
-      return { movies: values };
-    });
   });
 }
 
