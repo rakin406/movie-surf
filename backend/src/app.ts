@@ -1,11 +1,10 @@
 import Fastify from "fastify";
+import routes from "./routes/index";
 
 const app = Fastify({
   logger: true,
 });
 
-app.get("/", async (request, reply) => {
-  return { message: "Hello World" };
-});
+app.register(routes);
 
 export default app;
