@@ -1,4 +1,6 @@
+import "dotenv/config";
 import closeWithGrace from "close-with-grace";
+
 import app from "./app";
 
 const start = async () => {
