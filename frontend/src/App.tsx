@@ -6,7 +6,7 @@ function App() {
   const [message, setMessage] = useState();
 
   useEffect(() => {
-    fetch("/api/v1")
+    fetch("http://localhost:3000/api/v1/trending")
       .then((res) => res.json())
       .then((data) => {
         setMessage(data.message);
