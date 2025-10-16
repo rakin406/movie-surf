@@ -5,7 +5,7 @@ async function routes(fastify: FastifyInstance, options) {
     return { hello: "world" };
   });
 
-  // Gets a list of trending movies
+  // Gets trending movies
   fastify.get("/trending", async (request, reply) => {
     // TMDB API
     const url =
