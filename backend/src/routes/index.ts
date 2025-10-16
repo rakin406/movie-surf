@@ -2,7 +2,13 @@ import { FastifyInstance } from "fastify";
 
 async function routes(fastify: FastifyInstance, options) {
   fastify.get("/", async (request, reply) => {
-    return { hello: "world" };
+    // Call the /trending logic internally
+    return fastify
+      .inject({
+        method: "GET",
+        url: `${fastify.prefix || ""}/trending`,
+      })
+      .then((res) => JSON.parse(res.body));
   });
 
   // Gets trending movies
