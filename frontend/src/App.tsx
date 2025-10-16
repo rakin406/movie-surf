@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
+  const [message, setMessage] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:3000")
+    fetch("/api/v1")
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Failed to connect to server"));
+      .catch(console.error);
   }, []);
 
-  return <h1>{message}</h1>;
+  return <div>{message}</div>;
 }
 
 export default App;
