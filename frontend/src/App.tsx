@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Container from "@mui/material/Container";
 
 function App() {
   const [message, setMessage] = useState();
@@ -10,7 +11,7 @@ function App() {
       .catch(console.error);
   }, []);
 
-  return <div>{message}</div>;
+  return <Container maxWidth="sm">{message}</Container>;
 }
 
 export default App;
