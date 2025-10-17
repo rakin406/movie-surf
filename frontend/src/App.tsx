@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
 function App() {
   return (
