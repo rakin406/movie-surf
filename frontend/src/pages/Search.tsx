@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 import ShowMovies from "../components/ShowMovies";
 import Loading from "../components/Loading";
@@ -26,7 +27,9 @@ function Search() {
           minHeight: "85vh",
         }}
       >
-        Invalid Search
+        <Typography variant="h4" gutterBottom>
+          Invalid Search
+        </Typography>
       </Box>
     );
   }
