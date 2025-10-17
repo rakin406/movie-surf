@@ -55,7 +55,12 @@ async function routes(fastify: FastifyInstance, options) {
     );
   });
 
-  fastify.get("/search", async (request, reply) => {});
+  fastify.get("/search", async (request, reply) => {
+    return getMovies(
+      `https://api.themoviedb.org/3/search/movie?query=${request.query.q}&include_adult=true`,
+      tmdbOptions
+    );
+  });
 }
 
 export default routes;
