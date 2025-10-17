@@ -107,8 +107,13 @@ function NavigationBar() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onKeyDown={(ev) => {
+                // Detect keypress
                 if (ev.key === "Enter") {
-                  console.log(ev.target.value);
+                  // Make sure search isn't empty
+                  const title: string = ev.target.value.trim();
+                  if (title) {
+                    console.log(title);
+                  }
                 }
               }}
             />
