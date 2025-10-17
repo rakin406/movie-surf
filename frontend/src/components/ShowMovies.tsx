@@ -6,10 +6,6 @@ import Tooltip, {
   type TooltipProps,
   tooltipClasses,
 } from "@mui/material/Tooltip";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-
-import { useFetch } from "../hooks/useFetch";
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -23,15 +19,12 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-function Home() {
-  const trending = useFetch("http://localhost:3000/api/v1/trending");
-
-  return trending ? (
-    // TODO: Avoid using "any" for type.
-    <ImageList cols={3} gap={10} sx={{ width: "100%", height: "100%" }}>
-      {trending["movies"].map((movie: any) => (
+function ShowMovies({ movies }: { movies: any }) {
+  return (
+    <ImageList cols={5} gap={10} sx={{ width: "100%", height: "100%" }}>
+      {movies["movies"].map((movie: any) => (
         <HtmlTooltip title={movie.overview}>
-          <ImageListItem key={movie.poster}>
+          <ImageListItem key={movie.poster} sx={{ cursor: "pointer" }}>
             <img src={movie.poster} alt={movie.title} loading="lazy" />
             <ImageListItemBar
               sx={{
@@ -46,18 +39,7 @@ function Home() {
         </HtmlTooltip>
       ))}
     </ImageList>
-  ) : (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "98vh",
-      }}
-    >
-      <CircularProgress size="3rem" />
-    </Box>
   );
 }
 
-export default Home;
+export default ShowMovies;

@@ -1,23 +1,46 @@
 import { FastifyInstance } from "fastify";
 
-// Gets specific details from trending movies.
-function filterMovies(trending: Object) {
-  let movies = [];
+// Gets specific details from movies.
+function filterMovies(movies: Object) {
+  let filteredMovies = [];
 
-  Object.values(trending["results"]).forEach((movie) => {
+  Object.values(movies["results"]).forEach((movie) => {
+    // Sometimes the poster_path is null. In that case,
+    // skip it.
+    if (!movie["poster_path"]) return;
+
     const data = {
       id: movie["id"],
       title: movie["title"],
       overview: movie["overview"],
       poster: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
     };
-    movies.push(data);
+    filteredMovies.push(data);
   });
 
-  return movies;
+  return filteredMovies;
+}
+
+async function getMovies(url, options) {
+  try {
+    const res = await fetch(url, options);
+    const data = await res.json();
+    return JSON.stringify({ movies: filterMovies(data) });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function routes(fastify: FastifyInstance, options) {
+  // TMDB API
+  const tmdbOptions = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+    },
+  };
+
   fastify.get("/", async (request, reply) => {
     // Call the /trending logic internally
     return fastify
@@ -30,25 +53,17 @@ async function routes(fastify: FastifyInstance, options) {
 
   // Gets trending movies
   fastify.get("/trending", async (request, reply) => {
-    // TMDB API
-    const url =
-      "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-      },
-    };
+    return getMovies(
+      "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+      tmdbOptions
+    );
+  });
 
-    try {
-      const res = await fetch(url, options);
-      const data = await res.json();
-      return JSON.stringify({ movies: filterMovies(data) });
-    } catch (err) {
-      fastify.log.error(err);
-      reply.code(500).send({ error: "Failed to fetch trending movies" });
-    }
+  fastify.get("/search", async (request, reply) => {
+    return getMovies(
+      `https://api.themoviedb.org/3/search/movie?query=${request.query.q}&include_adult=true`,
+      tmdbOptions
+    );
   });
 }
 
