@@ -7,7 +7,7 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xl">
       <Routes>
         <Route path="/" element={<NavigationBar />}>
           <Route index element={<Home />} />
