@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = styled("div")(({ theme }) => ({
+const SearchBar = styled("div")(({ theme }) => ({
   position: "absolute",
   left: "50%",
   transform: "translateX(-50%)",
@@ -52,6 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function NavigationBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  let navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -99,7 +100,7 @@ function NavigationBar() {
           >
             Viola
           </Typography>
-          <Search>
+          <SearchBar>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -110,14 +111,14 @@ function NavigationBar() {
                 // Detect keypress
                 if (ev.key === "Enter") {
                   // Make sure search isn't empty
-                  const title: string = ev.target.value.trim();
+                  const title: string = ev.currentTarget.value.trim();
                   if (title) {
-                    console.log(title);
+                    navigate(`/search?q=${encodeURIComponent(title)}`);
                   }
                 }
               }}
             />
-          </Search>
+          </SearchBar>
         </Toolbar>
       </AppBar>
       {renderMenu}
