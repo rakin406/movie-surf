@@ -1,15 +1,15 @@
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
     <Container maxWidth="sm">
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<NavigationBar />}>
           <Route index element={<Home />} />
           {/* <Route path="about" element={<About />} />
           <Route path="dashboard" element={<Dashboard />} /> */}
@@ -21,32 +21,6 @@ function App() {
         </Route>
       </Routes>
     </Container>
-  );
-}
-
-function Layout() {
-  return (
-    <Box>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-
-      {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
-      <Outlet />
-    </Box>
   );
 }
 
