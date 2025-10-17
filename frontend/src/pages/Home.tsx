@@ -31,7 +31,7 @@ function Home() {
     <ImageList cols={5} gap={10} sx={{ width: "100%", height: "100%" }}>
       {trending["movies"].map((movie: any) => (
         <HtmlTooltip title={movie.overview}>
-          <ImageListItem key={movie.poster}>
+          <ImageListItem key={movie.poster} sx={{ cursor: "pointer" }}>
             <img src={movie.poster} alt={movie.title} loading="lazy" />
             <ImageListItemBar
               sx={{
@@ -52,7 +52,7 @@ function Home() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "98vh",
+        minHeight: "85vh",
       }}
     >
       <CircularProgress size="3rem" />
