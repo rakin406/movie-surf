@@ -106,6 +106,11 @@ function NavigationBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onKeyDown={(ev) => {
+                if (ev.key === "Enter") {
+                  console.log(ev.target.value);
+                }
+              }}
             />
           </Search>
         </Toolbar>
