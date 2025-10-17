@@ -4,6 +4,7 @@ export function useFetch(url: RequestInfo | URL, deps: any = []) {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
+    if (!url) return;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
