@@ -4,22 +4,20 @@ import { useFetch } from "../hooks/useFetch";
 function Home() {
   const trending = useFetch("http://localhost:3000/api/v1/trending");
 
-  if (trending === null) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "98vh",
-        }}
-      >
-        <CircularProgress size="3rem" />
-      </Box>
-    );
-  }
-
-  return trending;
+  return trending ? (
+    trending
+  ) : (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "98vh",
+      }}
+    >
+      <CircularProgress size="3rem" />
+    </Box>
+  );
 }
 
 export default Home;
