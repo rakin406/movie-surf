@@ -11,15 +11,10 @@ function Home() {
 
   return trending ? (
     // TODO: Avoid using "any" for type.
-    <ImageList sx={{ width: 500, height: 450 }}>
+    <ImageList cols={3} gap={10} sx={{ width: "100%", height: "100%" }}>
       {trending["movies"].map((movie: any) => (
         <ImageListItem key={movie.poster}>
-          <img
-            srcSet={`${movie.poster}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${movie.poster}?w=248&fit=crop&auto=format`}
-            alt={movie.title}
-            loading="lazy"
-          />
+          <img src={movie.poster} alt={movie.title} loading="lazy" />
           <ImageListItemBar
             sx={{
               background:
