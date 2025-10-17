@@ -28,7 +28,7 @@ function Home() {
 
   return trending ? (
     // TODO: Avoid using "any" for type.
-    <ImageList cols={3} gap={10} sx={{ width: "100%", height: "100%" }}>
+    <ImageList cols={5} gap={10} sx={{ width: "100%", height: "100%" }}>
       {trending["movies"].map((movie: any) => (
         <HtmlTooltip title={movie.overview}>
           <ImageListItem key={movie.poster}>
