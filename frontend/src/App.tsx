@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import { Container } from "@mui/material";
+import Home from "./components/Home";
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-    fetch("http://localhost:3000")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Failed to connect to server"));
-  }, []);
-
-  return <h1>{message}</h1>;
+  return (
+    <Container maxWidth="sm">
+      <Home />
+    </Container>
+  );
 }
 
 export default App;

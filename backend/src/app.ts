@@ -33,6 +33,6 @@ await app.register(import("@fastify/swagger-ui"), {
   transformSpecificationClone: true,
 });
 
-app.register(routes);
+await app.register(routes, { prefix: "/api/v1" });
 
 export default app;

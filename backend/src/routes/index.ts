@@ -1,8 +1,31 @@
 import { FastifyInstance } from "fastify";
 
+// Gets specific details from trending movies.
+function filterMovies(trending: Object) {
+  let movies = [];
+
+  Object.values(trending["results"]).forEach((movie) => {
+    const data = {
+      id: movie["id"],
+      title: movie["title"],
+      overview: movie["overview"],
+      poster: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
+    };
+    movies.push(data);
+  });
+
+  return movies;
+}
+
 async function routes(fastify: FastifyInstance, options) {
   fastify.get("/", async (request, reply) => {
-    return { hello: "world" };
+    // Call the /trending logic internally
+    return fastify
+      .inject({
+        method: "GET",
+        url: `${fastify.prefix || ""}/trending`,
+      })
+      .then((res) => JSON.parse(res.body));
   });
 
   // Gets trending movies
@@ -21,7 +44,7 @@ async function routes(fastify: FastifyInstance, options) {
     try {
       const res = await fetch(url, options);
       const data = await res.json();
-      return data;
+      return JSON.stringify({ movies: filterMovies(data) });
     } catch (err) {
       fastify.log.error(err);
       reply.code(500).send({ error: "Failed to fetch trending movies" });
