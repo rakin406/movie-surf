@@ -9,7 +9,7 @@ function filterMovies(trending: Object) {
       id: movie["id"],
       title: movie["title"],
       overview: movie["overview"],
-      posterUrl: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
+      poster: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
     };
     movies.push(data);
   });
