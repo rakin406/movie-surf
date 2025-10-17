@@ -5,6 +5,10 @@ function filterMovies(movies: Object) {
   let filteredMovies = [];
 
   Object.values(movies["results"]).forEach((movie) => {
+    // Sometimes the poster_path is null. In that case,
+    // skip it.
+    if (!movie["poster_path"]) return;
+
     const data = {
       id: movie["id"],
       title: movie["title"],
