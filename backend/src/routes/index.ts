@@ -1,5 +1,35 @@
 import { FastifyInstance } from "fastify";
 
+// Gets magnet link of movie using Jackett API.
+async function getMagnetLink(movieTitle: string) {
+  const url = `http://localhost:9117/api/v2.0/indexers/all/results \
+    ?apikey=${process.env.JACKETT_API_KEY}&Query=${movieTitle}&Category[]=2000`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const results = data.Results;
+
+    // Magnet link doesn't exist
+    if (!results || results.length === 0) {
+      return null;
+    }
+
+    // Sort by seeders descending
+    const sorted = results.sort((a: any, b: any) => b.Seeders - a.Seeders);
+
+    // Take the top 20 and pick the highest seeded
+    const top20 = sorted.slice(0, 20);
+    const highestSeeded = top20[0];
+
+    return highestSeeded.MagnetUri;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return null;
+}
+
 // Gets specific details from movies.
 function filterMovies(movies: Object) {
   let filteredMovies = [];
