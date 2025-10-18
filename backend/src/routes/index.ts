@@ -30,6 +30,16 @@ async function getMagnetLink(movieTitle: string) {
   return null;
 }
 
+function getRequiredDetails(movie: Object) {
+  const data = {
+    id: movie["id"],
+    title: movie["title"],
+    overview: movie["overview"],
+    poster: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
+  };
+  return data;
+}
+
 // Gets specific details from movies.
 function filterMovies(movies: Object) {
   let filteredMovies = [];
@@ -38,14 +48,7 @@ function filterMovies(movies: Object) {
     // Sometimes the poster_path is null. In that case,
     // skip it.
     if (!movie["poster_path"]) return;
-
-    const data = {
-      id: movie["id"],
-      title: movie["title"],
-      overview: movie["overview"],
-      poster: `https://image.tmdb.org/t/p/w500${movie["poster_path"]}`,
-    };
-    filteredMovies.push(data);
+    filteredMovies.push(getRequiredDetails(movie));
   });
 
   return filteredMovies;
@@ -94,6 +97,10 @@ async function routes(fastify: FastifyInstance, options) {
       `https://api.themoviedb.org/3/search/movie?query=${request.query.q}&include_adult=true`,
       tmdbOptions
     );
+  });
+
+  fastify.get("/watch/:id", async (request, reply) => {
+    const id = request.params;
   });
 }
 
