@@ -2,8 +2,9 @@ import { FastifyInstance } from "fastify";
 
 // Gets magnet link of movie using Jackett API.
 async function getMagnetLink(movieTitle: string) {
-  const url = `http://localhost:9117/api/v2.0/indexers/all/results \
-    ?apikey=${process.env.JACKETT_API_KEY}&Query=${movieTitle}&Category[]=2000`;
+  const url = `http://localhost:9117/api/v2.0/indexers/all/results?apikey=${
+    process.env.JACKETT_API_KEY
+  }&Query=${encodeURIComponent(movieTitle)}&Category[]=2000`;
 
   try {
     const res = await fetch(url);
@@ -120,7 +121,7 @@ async function routes(fastify: FastifyInstance, options) {
         }
 
         // Get magnet link from movie title
-        const magnetLink = getMagnetLink(data["title"]);
+        const magnetLink = await getMagnetLink(data["title"]);
         if (!magnetLink) return null;
 
         return JSON.stringify({ magnetLink: magnetLink });
