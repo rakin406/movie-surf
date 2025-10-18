@@ -101,6 +101,28 @@ async function routes(fastify: FastifyInstance, options) {
 
   fastify.get("/watch/:id", async (request, reply) => {
     const id = request.params;
+
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}`,
+        tmdbOptions
+      );
+      const data = await res.json();
+
+      // Movie not found
+      if (
+        (data.hasOwnProperty("success") && !data["success"]) ||
+        !data["poster_path"]
+      ) {
+        return null;
+      }
+
+      return JSON.stringify(getRequiredDetails(data));
+    } catch (err) {
+      console.log(err);
+    }
+
+    return null;
   });
 }
 
