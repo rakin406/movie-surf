@@ -119,7 +119,11 @@ async function routes(fastify: FastifyInstance, options) {
           return null;
         }
 
-        return JSON.stringify(getRequiredDetails(data));
+        // Get magnet link from movie title
+        const magnetLink = getMagnetLink(data["title"]);
+        if (!magnetLink) return null;
+
+        return JSON.stringify({ magnetLink: magnetLink });
       } catch (err) {
         console.log(err);
       }
