@@ -1,7 +1,7 @@
 {
-  "name": "viola-app",
+  "name": "movie-surf",
   "version": "0.0.0",
-  "description": "Movie streaming web application",
+  "description": "Web application",
   "type": "module",
   "scripts": {
     "start": "tsx src/server.ts",

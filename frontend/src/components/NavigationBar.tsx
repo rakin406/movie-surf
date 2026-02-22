@@ -98,7 +98,7 @@ function NavigationBar() {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            Viola
+            Movie Surf
           </Typography>
           <SearchBar>
             <SearchIconWrapper>
