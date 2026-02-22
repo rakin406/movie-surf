@@ -4,6 +4,9 @@ services:
       context: ./backend
     ports:
       - "3000:3000"
+    environment:
+      TMDB_ACCESS_TOKEN: ${TMDB_ACCESS_TOKEN}
+      JACKETT_API_KEY: ${JACKETT_API_KEY}
     volumes:
       - ./backend/src:/app/src
   frontend:
