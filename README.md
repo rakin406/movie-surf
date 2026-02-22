@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Demo][images/demo.png]](https://vimeo.com/1167115405?fl=ip&fe=ec)
+[![Demo][./images/demo.png]](https://vimeo.com/1167115405?fl=ip&fe=ec)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
