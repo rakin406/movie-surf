@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<iframe src="https://player.vimeo.com/video/1167115405?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1920" height="1080" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Movie Surf Demo"></iframe>
+[![Demo][images/demo.png]](https://vimeo.com/1167115405?fl=ip&fe=ec)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
